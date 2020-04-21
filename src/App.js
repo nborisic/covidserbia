@@ -46,8 +46,6 @@ const countriesArr = [
   }
 ]
 
-// testsPerOneMillion
-
 const lineCharts = ['cases', 'deaths', 'recovered'];
 const barCharts = ['cases','deaths','tests']
 
@@ -61,7 +59,7 @@ class App extends Component {
     let countriesTime = [];
     let countriesMil = [];
 
-    countriesArr.map((country) => {
+    countriesArr.forEach((country) => {
       axios.get(`https://corona.lmao.ninja/v2/historical/${country.name}`)
       .then(res => {        
         countriesTime.push({...res.data});
@@ -94,18 +92,18 @@ class App extends Component {
 
   getBarData = (chartBy) => {
     const {countriesMil} = this.state;
-    console.log('countriesMil',countriesMil);
     
     const barData = countriesMil.map((country) => {
       let bar = {name: country.country, value: country[`${chartBy}PerOneMillion`]}
       return bar;
-    })
-
-    console.log('barData',barData);
+    }).sort((a, b) => (a.value < b.value) ? 1 : -1)
     
-
     return barData;
   }
+
+  renderCustomBarLabel = ({ payload, x, y, width, height, value }) => {
+    return <text x={x + width / 2} y={y} fill="#666" textAnchor="middle" dy={-6}>{value}</text>;
+  };
 
   renderBarCharts = () => {
     return barCharts.map((chart) => {
@@ -121,8 +119,7 @@ class App extends Component {
             <XAxis dataKey="name"/>
             <YAxis/>
             <CartesianGrid strokeDasharray="3 3"/>
-            {/* <Tooltip /> */}
-            <Bar dataKey='value' fill={'#f7008c'}/>
+            <Bar dataKey='value' fill={'#f7008c'} label={this.renderCustomBarLabel}/>
           </BarChart>
         </div>
       )
