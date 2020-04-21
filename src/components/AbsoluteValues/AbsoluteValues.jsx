@@ -23,8 +23,6 @@ export default class AbsoluteValues extends Component {
     const start = async () => {
       for (let index = 0; index < countriesArr.length; index++) {
         const country = countriesArr[index];
-        console.log(country);
-        
         await axios.get(`https://corona.lmao.ninja/v2/historical/${country.name}`)
         .then(res => {        
           countriesTime.push({...res.data});
@@ -68,7 +66,7 @@ export default class AbsoluteValues extends Component {
             width={1000} 
             height={500} 
             data={this.getData(chart)}
-            margin={{top: 5, right: 30, left: 20, bottom: 5}}
+            margin={{top: 20, right: 30, left: 20, bottom: 5}}
           >
             <XAxis dataKey="name"/>
             <YAxis/>

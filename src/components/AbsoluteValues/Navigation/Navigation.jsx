@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import {
-  Link
+    NavLink
 } from "react-router-dom";
+import './index.scss';
 
 export default class Navigation extends Component {
     render() {
         const {startLoading} = this.props;
 
         return (
-            <div>
-                <Link to='/' onClick={() => startLoading()}>Stats per million</Link>
-                <Link to='/absolute' onClick={() => startLoading()}>Absolute numbers</Link>
+            <div className='navigation-wrapper'>
+                <NavLink to='/' onClick={() => startLoading()} exact className='navigation-link' activeClassName="navigation-link--active">Stats per million</NavLink>
+                <NavLink to='/absolute' onClick={() => startLoading()} exact className='navigation-link' activeClassName="navigation-link--active">Absolute numbers</NavLink>
             </div>
         )
     }

@@ -76,9 +76,10 @@ class App extends Component {
     return (
       <Router>
         <div className='app'>
+          <Loading isLoading={isLoading}/>
+          <h1 className='app-title'>Covid-19 stats for Serbia and region</h1>
           <div className='app-container'>
-            <Navigation startLoading={this.startLoading}/>
-            <Loading isLoading={isLoading}/>
+            <Navigation startLoading={this.startLoading}/>  
             <Route path='/' component={() => <PerMillion endLoading={this.endLoading} isLoading={isLoading} countriesArr={countriesArr}/>} exact />
             <Route path='/absolute' component={() => <AbsoluteValues endLoading={this.endLoading} isLoading={isLoading} countriesArr={countriesArr}/>} exact />
           </div>

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import {XAxis, YAxis, CartesianGrid, BarChart, Bar} from 'recharts';
 
-const barCharts = ['cases','deaths','tests']
+const barCharts = ['cases','tests','deaths']
 
 export default class PerMillion extends Component {
   state = {
@@ -60,7 +60,7 @@ export default class PerMillion extends Component {
             width={1000} 
             height={500} 
             data={this.getBarData(chart)}
-            margin={{top: 5, right: 30, left: 20, bottom: 5}}
+            margin={{top: 20, right: 30, left: 20, bottom: 5}}
           >
             <XAxis dataKey="name"/>
             <YAxis/>

@@ -4,17 +4,20 @@
 }
 
 .logo-container {
-    min-height: calc(100vh - 100px);
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #ffffff;
 }
 
 .logo-container--fade { 
-    position: absolute;
     z-index: -1;
     width: 100%;
-    top: 18px;
+    top: 0;
     left: 0;
     animation: fade 1.2s forwards;
 }

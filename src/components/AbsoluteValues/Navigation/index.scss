@@ -1,0 +1,24 @@
+.navigation-wrapper {
+    margin-bottom: 60px;
+}
+
+.navigation-link {
+    color: #000000;
+    text-decoration: none;
+    opacity: 1;
+    transition: opacity .3s;
+    text-shadow: 1px 1px rgba(0,0,0, 0.2);
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.navigation-link:first-child {
+    margin-right: 100px;
+}
+
+.navigation-link--active {
+    color: red;
+    text-shadow: 1px 1px rgba(255,0,0,0.2)
+}
