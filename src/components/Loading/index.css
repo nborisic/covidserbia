@@ -1,0 +1,38 @@
+.logo {
+    animation: rotation 4s infinite linear;
+    width: 100px;
+}
+
+.logo-container {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-container--fade { 
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    top: 18px;
+    left: 0;
+    animation: fade 1.2s forwards;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
