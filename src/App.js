@@ -18,43 +18,53 @@ new WindowManager(breakpoints.formatted, 100);
 const countriesArr = [
   {
     name: 'Serbia',
-    color: '#f70000'
+    color: '#f70000',
+    abb: 'SER'
   },
   {
     name: 'Albania',
-    color: '#f7ad00'
+    color: '#f7ad00',
+    abb: 'AL'
   },
   {
     name: 'Bulgaria',
-    color: '#ebe834'
+    color: '#ebe834',
+    abb: 'BG'
   },
   {
     name: 'Hungary',
-    color: '#71eb34'
+    color: '#71eb34',
+    abb: 'HUN'
   },
   {
     name: 'Slovenia',
-    color: '#34eb99'
+    color: '#34eb99',
+    abb: 'SVN'
   },
   {
     name: 'Greece',
-    color: '#34d6eb'
+    color: '#34d6eb',
+    abb: 'GR'
   },
   {
     name: 'Bosnia',
-    color: '#347aeb'
+    color: '#347aeb',
+    abb: 'BIH'
   },
   {
     name: 'Romania',
-    color: '#6834eb'
+    color: '#6834eb',
+    abb: 'ROU'
   },
   {
     name: 'Croatia',
-    color: '#ca00f7'
+    color: '#ca00f7',
+    abb: 'HRV'
   },
   {
     name: 'Montenegro',
-    color: '#f7008c'
+    color: '#f7008c',
+    abb: 'MNE'
   }
 ]
 

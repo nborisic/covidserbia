@@ -6,13 +6,12 @@ import graphWidth from '../../constants/graphWidth';
 import './index.scss';
 
 
-import {XAxis, YAxis, CartesianGrid, BarChart, Bar} from 'recharts';
+import {XAxis, YAxis, CartesianGrid, BarChart, Bar, Tooltip} from 'recharts';
 
 const barCharts = ['cases','tests','deaths']
 
 class PerMillion extends Component {
   state = {
-    countriesTime: [],
     countriesMil: []
   }
 
@@ -25,7 +24,7 @@ class PerMillion extends Component {
         const country = countriesArr[index];
         await axios.get(`https://corona.lmao.ninja/v2/countries/${country.name}`)
         .then(res => {        
-          countriesMil.push({...res.data});
+          countriesMil.push({...res.data, abb: countriesArr[index].abb});
           
           this.setState({ countriesMil });
         })
@@ -42,10 +41,13 @@ class PerMillion extends Component {
 
 
   getBarData = (chartBy) => {
+    const {breakpoint} = this.props;
     const {countriesMil} = this.state;
     
+    const isLgOrXl = breakpoint === 'large' || breakpoint === 'xlarge';
+
     const barData = countriesMil.map((country) => {
-      let bar = {name: country.country, value: country[`${chartBy}PerOneMillion`]}
+      let bar = {name: isLgOrXl ? country.country : country.abb, value: country[`${chartBy}PerOneMillion`]}
       return bar;
     }).sort((a, b) => (a.value < b.value) ? 1 : -1)
     
@@ -56,8 +58,25 @@ class PerMillion extends Component {
     return <text x={x + width / 2} y={y} fill="#666" textAnchor="middle" dy={-6}>{value}</text>;
   };
 
+  customTooltip = ({ payload, label, active }) => {
+    const {countriesArr} = this.props;
+    const country = countriesArr.find((country) => country.abb === label);
+    
+    if (active) {
+      return (
+        <div className="per-million__custom-tooltip">
+          <p className="label">{`${country.name} : ${payload[0].value}`}</p>
+        </div>
+      );
+    }
+  
+    return null;
+  }
+
   renderBarCharts = () => {
     const {breakpoint} = this.props;
+
+    const isLgOrXl = breakpoint === 'large' || breakpoint === 'xlarge';
 
     return barCharts.map((chart) => {
       return (
@@ -72,6 +91,7 @@ class PerMillion extends Component {
             <XAxis dataKey="name"/>
             <YAxis/>
             <CartesianGrid strokeDasharray="3 3"/>
+            {!isLgOrXl && <Tooltip content={this.customTooltip }/>}
             <Bar dataKey='value' fill={'#f7008c'} label={this.renderCustomBarLabel}/>
           </BarChart>
         </div>
