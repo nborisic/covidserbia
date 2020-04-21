@@ -1,0 +1,49 @@
+@import './scss/breakpoints';
+
+
+.app {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 30px;
+
+  font-size: 12px;
+
+  @include md () {
+    font-size: 14px
+  }
+
+
+  h2 {
+    font-size: 10px;
+
+    @include md () {
+      font-size: 25px
+    }
+
+    @include lg () {
+      font-size: 35px
+    }
+  }
+}
+
+.app-title {
+  padding-top: 20px;
+  font-size: 15px;
+
+  @include md () {
+    font-size: 30px
+  }
+
+  @include lg () {
+    font-size: 40px
+  }
+}
+
+.app-container {
+  width: 80%;
+  min-height: 100vh;
+  position: relative;
+}
+

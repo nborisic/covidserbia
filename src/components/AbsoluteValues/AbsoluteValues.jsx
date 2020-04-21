@@ -1,14 +1,22 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { withWindow } from 'react-window-decorators';
+import graphWidth from '../../constants/graphWidth';
 
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+import './index.scss';
 
 const lineCharts = ['cases', 'deaths', 'recovered'];
 
-export default class AbsoluteValues extends Component {
-  state = {
+class AbsoluteValues extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
       countriesTime: []
+    }
   }
+  
 
   asyncForEach = async (array, callback) => {
     for (let index = 0; index < array.length; index++) {
@@ -56,17 +64,18 @@ export default class AbsoluteValues extends Component {
   }
 
   renderLineCharts = () => {
-    const {countriesArr} = this.props;
- 
+    const {countriesArr, breakpoint} = this.props;
+
+
     return lineCharts.map((chart) => {
       return (
-        <div key={chart}>
-          <h1>{`Number of ${chart}`}</h1>
+        <div className='absolute-values' key={chart}>
+          <h2>{`Number of ${chart}`}</h2>
           <LineChart 
-            width={1000} 
-            height={500} 
+            width={graphWidth[breakpoint].width} 
+            height={graphWidth[breakpoint].height} 
             data={this.getData(chart)}
-            margin={{top: 20, right: 30, left: 20, bottom: 5}}
+            margin={{top: 20, right: 0, left: 0, bottom: 5}}
           >
             <XAxis dataKey="name"/>
             <YAxis/>
@@ -74,7 +83,7 @@ export default class AbsoluteValues extends Component {
             <Tooltip />
             <Legend />
             {countriesArr.map(country => {
-              return (<Line key={country.name} type="monotone" dataKey={country.name} stroke={country.color} activeDot={{ r: 5 }}/>)
+              return (<Line key={country.name} type="monotone" dataKey={country.name} stroke={country.color} dot={breakpoint !== 'small'} activeDot={{ r: 5 }}/>)
             })}
           </LineChart>
         </div>
@@ -98,3 +107,6 @@ export default class AbsoluteValues extends Component {
     );  
   }
 }
+
+
+export default withWindow(AbsoluteValues)

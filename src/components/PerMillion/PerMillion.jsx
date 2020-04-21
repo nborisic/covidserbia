@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { withWindow } from 'react-window-decorators';
+
+import graphWidth from '../../constants/graphWidth';
+import './index.scss';
+
 
 import {XAxis, YAxis, CartesianGrid, BarChart, Bar} from 'recharts';
 
 const barCharts = ['cases','tests','deaths']
 
-export default class PerMillion extends Component {
+class PerMillion extends Component {
   state = {
     countriesTime: [],
     countriesMil: []
@@ -52,15 +57,17 @@ export default class PerMillion extends Component {
   };
 
   renderBarCharts = () => {
+    const {breakpoint} = this.props;
+
     return barCharts.map((chart) => {
       return (
-        <div key={chart}>
+        <div key={chart} className='per-million'>
           <h1>{`Number of ${chart} per million`}</h1>
           <BarChart 
-            width={1000} 
-            height={500} 
+            width={graphWidth[breakpoint].width} 
+            height={graphWidth[breakpoint].height} 
             data={this.getBarData(chart)}
-            margin={{top: 20, right: 30, left: 20, bottom: 5}}
+            margin={{top: 20, right: 0, left: 0, bottom: 5}}
           >
             <XAxis dataKey="name"/>
             <YAxis/>
@@ -87,4 +94,6 @@ export default class PerMillion extends Component {
     );  
   }
 }
+
+export default withWindow(PerMillion)
 

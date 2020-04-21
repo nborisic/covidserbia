@@ -1,0 +1,34 @@
+$viewport-sm: 375px;
+$viewport-md: 600px;
+$viewport-lg: 900px;
+$viewport-xl: 1200px;
+
+@mixin xs-only {
+  @media (max-width: #{$viewport-sm - 1}) {
+    @content;
+  }
+}
+
+@mixin sm-only {
+  @media (max-width: #{$viewport-md - 1}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$viewport-md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$viewport-lg}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$viewport-xl}) {
+    @content;
+  }
+}

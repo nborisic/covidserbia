@@ -10,7 +10,14 @@ export default class Navigation extends Component {
 
         return (
             <div className='navigation-wrapper'>
-                <NavLink to='/' onClick={() => startLoading()} exact className='navigation-link' activeClassName="navigation-link--active">Stats per million</NavLink>
+                <NavLink 
+                    to='/' 
+                    onClick={() => startLoading()} 
+                    exact 
+                    className='navigation-link' 
+                    activeClassName="navigation-link--active">
+                    Stats per million
+                </NavLink>
                 <NavLink to='/absolute' onClick={() => startLoading()} exact className='navigation-link' activeClassName="navigation-link--active">Absolute numbers</NavLink>
             </div>
         )

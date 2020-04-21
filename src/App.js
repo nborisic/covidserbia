@@ -3,12 +3,17 @@ import {
   BrowserRouter as Router,
   Route,
 } from "react-router-dom";
-import Navigation from './components/AbsoluteValues/Navigation/Navigation';
+import { WindowManager } from 'react-window-decorators';
+import breakpoints from './constants/breakpoint';
+
+import Navigation from './components/Navigation/Navigation';
 import AbsoluteValues from './components/AbsoluteValues/AbsoluteValues';
 import PerMillion from './components/PerMillion/PerMillion';
 import Loading from './components/Loading/Loading';
 
-import './App.css';
+import './App.scss';
+
+new WindowManager(breakpoints.formatted, 100);
 
 const countriesArr = [
   {
