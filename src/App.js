@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-} from "react-router-dom";
-import { WindowManager } from 'react-window-decorators';
+import {BrowserRouter as Router, Route } from 'react-router-dom';
+import {WindowManager} from 'react-window-decorators';
 import breakpoints from './constants/breakpoint';
 
 import Navigation from './components/Navigation/Navigation';
@@ -19,87 +16,107 @@ const countriesArr = [
   {
     name: 'Serbia',
     color: '#f70000',
-    abb: 'SER'
+    abb: 'SER',
   },
   {
     name: 'Albania',
     color: '#f7ad00',
-    abb: 'AL'
+    abb: 'AL',
   },
   {
     name: 'Bulgaria',
     color: '#ebe834',
-    abb: 'BG'
+    abb: 'BG',
   },
   {
     name: 'Hungary',
     color: '#71eb34',
-    abb: 'HUN'
+    abb: 'HUN',
   },
   {
     name: 'Slovenia',
     color: '#34eb99',
-    abb: 'SVN'
+    abb: 'SVN',
   },
   {
     name: 'Greece',
     color: '#34d6eb',
-    abb: 'GR'
+    abb: 'GR',
   },
   {
     name: 'Bosnia',
     color: '#347aeb',
-    abb: 'BIH'
+    abb: 'BIH',
   },
   {
     name: 'Romania',
     color: '#6834eb',
-    abb: 'ROU'
+    abb: 'ROU',
   },
   {
     name: 'Croatia',
     color: '#ca00f7',
-    abb: 'HRV'
+    abb: 'HRV',
   },
   {
     name: 'Montenegro',
     color: '#f7008c',
-    abb: 'MNE'
-  }
-]
+    abb: 'MNE',
+  },
+];
 
 class App extends Component {
   state = {
-    isLoading: true
-  }
+    isLoading: true,
+  };
 
   endLoading = () => {
     this.setState({
-      isLoading: false
-    })
-  }
+      isLoading: false,
+    });
+  };
 
   startLoading = () => {
     this.setState({
-      isLoading: true
-    })
-  }
+      isLoading: true,
+    });
+  };
 
-  render () {
+  render() {
     const {isLoading} = this.state;
 
     return (
-      <Router>
-        <div className='app'>
-          <Loading isLoading={isLoading}/>
-          <h1 className='app-title'>Covid-19 stats for Serbia and region</h1>
-          <div className='app-container'>
-            <Navigation startLoading={this.startLoading}/>  
-            <Route path='/' component={() => <PerMillion endLoading={this.endLoading} isLoading={isLoading} countriesArr={countriesArr}/>} exact />
-            <Route path='/absolute' component={() => <AbsoluteValues endLoading={this.endLoading} isLoading={isLoading} countriesArr={countriesArr}/>} exact />
-          </div>
-        </div>
-      </Router>
+      <div className="app">
+        <Router>
+            <Loading isLoading={isLoading} />
+            <h1 className="app-title">Covid-19 stats for Serbia and region</h1>
+            <div className="app-container">
+              <Navigation startLoading={this.startLoading} />
+              <Route
+                path="/"
+                component={() => (
+                  <PerMillion
+                    endLoading={this.endLoading}
+                    isLoading={isLoading}
+                    countriesArr={countriesArr}
+                  />
+                )}
+                exact
+              />
+              <Route
+                path="/absolute"
+                component={() => (
+                  <AbsoluteValues
+                    endLoading={this.endLoading}
+                    isLoading={isLoading}
+                    countriesArr={countriesArr}
+                  />
+                )}
+                exact
+              />
+            </div>
+        </Router>
+      </div>
     );
   }
 }
